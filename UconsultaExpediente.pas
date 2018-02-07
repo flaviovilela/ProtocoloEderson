@@ -29,45 +29,46 @@ uses
   dxPSPrVwStd, dxPSPrVwAdv, dxPSPrVwRibbon, dxPScxPageControlProducer,
   dxPScxGridLnk, dxPScxGridLayoutViewLnk, dxPScxEditorProducers,
   dxPScxExtEditorProducers, dxSkinsdxBarPainter, dxSkinsdxRibbonPainter,
-  dxPSCore, dxPScxCommon, cxPropertiesStore;
+  dxPSCore, dxPScxCommon, cxPropertiesStore, dxLayoutContainer,
+  cxGridInplaceEditForm, dxBarBuiltInMenu, cxPC;
 
 type
   TfrmConsultaExpediente = class(TForm)
-    cxgrdbtblvwGrid1DBTableView1: TcxGridDBTableView;
-    cxgrd1: TcxGrid;
     Panel1: TPanel;
     Panel2: TPanel;
     cxImage2: TcxImage;
     cxImage1: TcxImage;
     cxImage3: TcxImage;
-    cxgrd1DBTableView1: TcxGridDBTableView;
-    cxgrd1DBTableView2: TcxGridDBTableView;
-    cxgrd1DBTableView1Codigo: TcxGridDBColumn;
-    cxgrd1DBTableView1N_Expediente: TcxGridDBColumn;
-    cxgrd1DBTableView1Data_Lancamento: TcxGridDBColumn;
-    cxgrd1DBTableView2Codigo: TcxGridDBColumn;
-    cxgrd1DBTableView2Codigo_Expediente: TcxGridDBColumn;
-    cxgrd1DBTableView2Data_Movimentacao: TcxGridDBColumn;
-    cxgrd1DBTableView2Assunto: TcxGridDBColumn;
-    cxgrd1DBTableView2Mensagem: TcxGridDBColumn;
-    cxgrd1DBTableView2N_Expediente: TcxGridDBColumn;
-    cxgrd1DBTableView2Prazo: TcxGridDBColumn;
-    cxgrd1Level1: TcxGridLevel;
+    cxImage4: TcxImage;
+    cxPageControl1: TcxPageControl;
+    cxTabSheet1: TcxTabSheet;
     cxgrd1DBTableView3: TcxGridDBTableView;
+    cxgrd1Level1: TcxGridLevel;
+    cxTabSheet2: TcxTabSheet;
     cxgrd1DBTableView3Codigo: TcxGridDBColumn;
-    cxgrd1DBTableView3Codigo_Expediente: TcxGridDBColumn;
-    cxgrd1DBTableView3Data_Movimentacao: TcxGridDBColumn;
-    cxgrd1DBTableView3Assunto: TcxGridDBColumn;
-    cxgrd1DBTableView3Mensagem: TcxGridDBColumn;
     cxgrd1DBTableView3N_Expediente: TcxGridDBColumn;
-    cxgrd1DBTableView3Prazo: TcxGridDBColumn;
+    cxgrd1DBTableView3Data_Lancamento: TcxGridDBColumn;
+    cxgrd1DBTableView3Descricao: TcxGridDBColumn;
+    cxgrd1DBTableView3Status: TcxGridDBColumn;
+    cxGrid1: TcxGrid;
+    cxGridDBTableView4: TcxGridDBTableView;
+    cxGridLevel1: TcxGridLevel;
+    cxGridDBTableView4Codigo: TcxGridDBColumn;
+    cxGridDBTableView4Codigo_Expediente: TcxGridDBColumn;
+    cxGridDBTableView4Data_Movimentacao: TcxGridDBColumn;
+    cxGridDBTableView4Mensagem: TcxGridDBColumn;
+    cxGridDBTableView4N_Expediente: TcxGridDBColumn;
+    cxGridDBTableView4Prazo: TcxGridDBColumn;
+    cxGridDBTableView4Descricao: TcxGridDBColumn;
     dxComponentPrinter1: TdxComponentPrinter;
     dxComponentPrinter1Link1: TdxGridReportLink;
     cxPropertiesStore1: TcxPropertiesStore;
-    cxImage4: TcxImage;
     procedure cxImage3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cxImage4Click(Sender: TObject);
+    procedure cxgrd1DBTableView3StatusGetDisplayText(
+      Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+      var AText: string);
   private
     { Private declarations }
     Conexao: TADOConnection;
@@ -86,6 +87,16 @@ implementation
 {$R *.dfm}
 
 uses UDM, OperacoesConexao, UTransfereMovimento;
+
+procedure TfrmConsultaExpediente.cxgrd1DBTableView3StatusGetDisplayText(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+  var AText: string);
+begin
+  if (ARecord.Values[Sender.Index] = '0') then
+    AText:= 'Lançado'
+  else
+    AText:= 'Arquivado';
+end;
 
 procedure TfrmConsultaExpediente.cxImage3Click(Sender: TObject);
 begin
@@ -113,6 +124,7 @@ procedure TfrmConsultaExpediente.FormCreate(Sender: TObject);
 begin
   dm.qryMovimentacao.Close;
   dm.qryExpediente.Close;
+  cxPageControl1.Properties.TabIndex:= 0;
 end;
 
 end.

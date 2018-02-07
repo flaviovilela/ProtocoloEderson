@@ -119,7 +119,7 @@ object frmMovimentacao: TfrmMovimentacao
     Top = 0
     Width = 680
     Height = 416
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 1
@@ -158,6 +158,19 @@ object frmMovimentacao: TfrmMovimentacao
         Width = 38
         Height = 13
         Caption = 'C'#243'digo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 3
+        Top = 38
+        Width = 55
+        Height = 13
+        Caption = 'Descri'#231#227'o'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -209,9 +222,9 @@ object frmMovimentacao: TfrmMovimentacao
       end
       object cxGrid1: TcxGrid
         Left = 3
-        Top = 36
+        Top = 112
         Width = 666
-        Height = 349
+        Height = 273
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -275,7 +288,6 @@ object frmMovimentacao: TfrmMovimentacao
           OptionsSelection.MultiSelect = True
           OptionsView.NoDataToDisplayInfoText = 'N'#227'o h'#225' dados para visualizar'
           OptionsView.Footer = True
-          OptionsView.GroupByBox = False
           OptionsView.GroupFooterMultiSummaries = True
           OptionsView.GroupFooters = gfAlwaysVisible
           OptionsView.GroupSummaryLayout = gslAlignWithColumns
@@ -291,9 +303,19 @@ object frmMovimentacao: TfrmMovimentacao
             DataBinding.FieldName = 'N_Expediente'
             Width = 117
           end
+          object cxGrid1DBTableView1Descricao: TcxGridDBColumn
+            Caption = 'Descri'#231#227'o'
+            DataBinding.FieldName = 'Descricao'
+            Width = 274
+          end
           object cxGrid1DBTableView1Data: TcxGridDBColumn
             Caption = 'Lan'#231'amento'
             DataBinding.FieldName = 'Data_Lancamento'
+          end
+          object cxGrid1DBTableView1Status: TcxGridDBColumn
+            DataBinding.FieldName = 'Status'
+            OnGetDisplayText = cxGrid1DBTableView1StatusGetDisplayText
+            Width = 75
           end
         end
         object cxGrid1Level1: TcxGridLevel
@@ -301,20 +323,52 @@ object frmMovimentacao: TfrmMovimentacao
         end
       end
       object BtnInserir_Expediente: TcxButton
-        Left = 262
-        Top = 15
+        Left = 270
+        Top = 0
         Width = 107
         Height = 19
         Caption = 'Inserir Expediente'
         TabOrder = 3
         OnClick = BtnInserir_ExpedienteClick
       end
+      object MmoDescricao: TMemo
+        Left = 3
+        Top = 53
+        Width = 666
+        Height = 55
+        MaxLength = 1000
+        TabOrder = 5
+      end
+      object RGStatus: TcxRadioGroup
+        Left = 403
+        Top = 3
+        Caption = 'Status'
+        Properties.Columns = 2
+        Properties.Items = <
+          item
+            Caption = 'Lan'#231'ado'
+          end
+          item
+            Caption = 'Arquivado'
+          end>
+        ItemIndex = 0
+        TabOrder = 6
+        Height = 37
+        Width = 162
+      end
+      object BtnEditar_Expediente: TcxButton
+        Left = 270
+        Top = 23
+        Width = 107
+        Height = 19
+        Caption = 'Editar Expediente'
+        TabOrder = 7
+        OnClick = BtnEditar_ExpedienteClick
+      end
     end
     object TabSheet2: TTabSheet
       Caption = 'Movimenta'#231#227'o'
       ImageIndex = 1
-      ExplicitLeft = 6
-      ExplicitTop = 31
       object Label2: TLabel
         Left = 343
         Top = 0
@@ -329,24 +383,11 @@ object frmMovimentacao: TfrmMovimentacao
         ParentFont = False
       end
       object Label4: TLabel
-        Left = 2
-        Top = 92
-        Width = 62
-        Height = 13
-        Caption = 'Mensagem'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object Label5: TLabel
         Left = 3
-        Top = 43
-        Width = 46
+        Top = 41
+        Width = 84
         Height = 13
-        Caption = 'Assunto'
+        Caption = 'Movimenta'#231#227'o'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -407,12 +448,12 @@ object frmMovimentacao: TfrmMovimentacao
         ParentFont = False
       end
       object MmoMensagem: TMemo
-        Left = 2
-        Top = 111
+        Left = 3
+        Top = 60
         Width = 666
-        Height = 82
+        Height = 133
         MaxLength = 1000
-        TabOrder = 4
+        TabOrder = 3
       end
       object DatePrazo: TDateTimePicker
         Left = 343
@@ -422,14 +463,6 @@ object frmMovimentacao: TfrmMovimentacao
         Date = 43095.364617187500000000
         Time = 43095.364617187500000000
         TabOrder = 2
-      end
-      object MmoAssunto: TMemo
-        Left = 2
-        Top = 62
-        Width = 666
-        Height = 27
-        MaxLength = 200
-        TabOrder = 3
       end
       object EdtCodigo_Expediente: TEdit
         Left = 63
@@ -445,7 +478,7 @@ object frmMovimentacao: TfrmMovimentacao
         ParentShowHint = False
         ReadOnly = True
         ShowHint = True
-        TabOrder = 7
+        TabOrder = 6
       end
       object DateDataMovimentacao: TDateTimePicker
         Left = 207
@@ -474,9 +507,9 @@ object frmMovimentacao: TfrmMovimentacao
         TabOrder = 0
       end
       object cxGrid2: TcxGrid
-        Left = 2
+        Left = 3
         Top = 199
-        Width = 667
+        Width = 666
         Height = 186
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -484,7 +517,7 @@ object frmMovimentacao: TfrmMovimentacao
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 5
         LookAndFeel.NativeStyle = False
         object cxGridDBTableView1: TcxGridDBTableView
           OnDblClick = cxGridDBTableView1DblClick
@@ -579,11 +612,6 @@ object frmMovimentacao: TfrmMovimentacao
             Options.Editing = False
             Width = 70
           end
-          object cxGridDBTableView1Assunto: TcxGridDBColumn
-            DataBinding.FieldName = 'Assunto'
-            Options.Editing = False
-            Width = 300
-          end
           object cxGridDBTableView1Mensagem: TcxGridDBColumn
             DataBinding.FieldName = 'Mensagem'
             Options.Editing = False
@@ -600,7 +628,7 @@ object frmMovimentacao: TfrmMovimentacao
         Width = 115
         Height = 19
         Caption = 'Inserir Movimenta'#231#227'o'
-        TabOrder = 5
+        TabOrder = 4
         OnClick = BtnInserir_MovimentoClick
       end
       object BtnEditar_Movimento: TcxButton
@@ -609,7 +637,7 @@ object frmMovimentacao: TfrmMovimentacao
         Width = 115
         Height = 19
         Caption = 'Editar Movimenta'#231#227'o'
-        TabOrder = 8
+        TabOrder = 7
         OnClick = BtnEditar_MovimentoClick
       end
       object EdtCodigo_Movimentacao: TEdit
@@ -626,7 +654,7 @@ object frmMovimentacao: TfrmMovimentacao
         ParentShowHint = False
         ReadOnly = True
         ShowHint = True
-        TabOrder = 9
+        TabOrder = 8
       end
     end
   end

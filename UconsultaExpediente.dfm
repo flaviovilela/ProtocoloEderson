@@ -18,300 +18,13 @@ object frmConsultaExpediente: TfrmConsultaExpediente
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object cxgrd1: TcxGrid
-    Left = 0
-    Top = 39
-    Width = 942
-    Height = 419
-    Align = alClient
-    TabOrder = 0
-    ExplicitTop = 43
-    object cxgrdbtblvwGrid1DBTableView1: TcxGridDBTableView
-      Navigator.Buttons.CustomButtons = <>
-      DataController.DataSource = DM.dsExpediente
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-    end
-    object cxgrd1DBTableView1: TcxGridDBTableView
-      Navigator.Buttons.CustomButtons = <>
-      Navigator.Buttons.First.Visible = False
-      Navigator.Buttons.PriorPage.Visible = False
-      Navigator.Buttons.Prior.Visible = False
-      Navigator.Buttons.Next.Enabled = False
-      Navigator.Buttons.Next.Visible = False
-      Navigator.Buttons.NextPage.Visible = False
-      Navigator.Buttons.Last.Visible = False
-      Navigator.Buttons.Insert.Hint = 'Clique para inserir uma nova atividade'
-      Navigator.Buttons.Insert.Visible = True
-      Navigator.Buttons.Append.Visible = False
-      Navigator.Buttons.Delete.Hint = 'Clique para remover o registro selecionado'
-      Navigator.Buttons.Delete.ImageIndex = 2
-      Navigator.Buttons.Delete.Visible = True
-      Navigator.Buttons.Edit.Visible = False
-      Navigator.Buttons.Post.Hint = 'Clique para confirmar o registro'
-      Navigator.Buttons.Post.Visible = True
-      Navigator.Buttons.Cancel.Visible = False
-      Navigator.Buttons.Refresh.Visible = False
-      Navigator.Buttons.SaveBookmark.Visible = False
-      Navigator.Buttons.GotoBookmark.Visible = False
-      Navigator.Buttons.Filter.Visible = False
-      FilterBox.Visible = fvNever
-      DataController.DataSource = DM.dsExpediente
-      DataController.KeyFieldNames = 'Codigo'
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      EditForm.UseDefaultLayout = False
-      FilterRow.Visible = True
-      OptionsBehavior.FocusFirstCellOnNewRecord = True
-      OptionsBehavior.GoToNextCellOnEnter = True
-      OptionsBehavior.NavigatorHints = True
-      OptionsCustomize.ColumnHiding = True
-      OptionsCustomize.DataRowSizing = True
-      OptionsSelection.MultiSelect = True
-      OptionsView.NoDataToDisplayInfoText = 'N'#227'o h'#225' dados para visualizar'
-      OptionsView.GroupFooters = gfAlwaysVisible
-      OptionsView.GroupSummaryLayout = gslAlignWithColumns
-      OptionsView.Indicator = True
-      Preview.Visible = True
-      object cxgrd1DBTableView1Codigo: TcxGridDBColumn
-        Caption = 'C'#243'digo'
-        DataBinding.FieldName = 'Codigo'
-        LayoutItem = cxgrd1DBTableView1LayoutItem1.Owner
-        Options.Editing = False
-        Width = 40
-      end
-      object cxgrd1DBTableView1N_Expediente: TcxGridDBColumn
-        Caption = 'N'#186' Expediente'
-        DataBinding.FieldName = 'N_Expediente'
-        LayoutItem = cxgrd1DBTableView1LayoutItem2.Owner
-        Options.Editing = False
-        Width = 104
-      end
-      object cxgrd1DBTableView1Data_Lancamento: TcxGridDBColumn
-        Caption = 'Lan'#231'amento'
-        DataBinding.FieldName = 'Data_Lancamento'
-        LayoutItem = cxgrd1DBTableView1LayoutItem3.Owner
-        Options.Editing = False
-      end
-      object RootGroup: TcxGridInplaceEditFormGroup
-        AlignHorz = ahLeft
-        AlignVert = avTop
-        ButtonOptions.Buttons = <>
-        Hidden = True
-        ItemIndex = 1
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = -1
-      end
-      object cxgrd1DBTableView1Group1: TdxLayoutAutoCreatedGroup
-        Parent = RootGroup.Owner
-        AlignHorz = ahLeft
-        AlignVert = avTop
-        Index = 0
-        AutoCreated = True
-      end
-      object cxgrd1DBTableView1LayoutItem1: TcxGridInplaceEditFormLayoutItem
-        Parent = cxgrd1DBTableView1Group1.Owner
-        AlignHorz = ahLeft
-        AlignVert = avTop
-        Index = 0
-      end
-      object cxgrd1DBTableView1LayoutItem2: TcxGridInplaceEditFormLayoutItem
-        Parent = RootGroup.Owner
-        AlignHorz = ahLeft
-        AlignVert = avTop
-        Index = 1
-      end
-      object cxgrd1DBTableView1LayoutItem3: TcxGridInplaceEditFormLayoutItem
-        Parent = cxgrd1DBTableView1Group1.Owner
-        AlignHorz = ahLeft
-        AlignVert = avTop
-        Index = 1
-      end
-    end
-    object cxgrd1DBTableView2: TcxGridDBTableView
-      Navigator.Buttons.CustomButtons = <>
-      Navigator.Buttons.First.Visible = False
-      Navigator.Buttons.PriorPage.Visible = False
-      Navigator.Buttons.Prior.Visible = False
-      Navigator.Buttons.Next.Enabled = False
-      Navigator.Buttons.Next.Visible = False
-      Navigator.Buttons.NextPage.Visible = False
-      Navigator.Buttons.Last.Visible = False
-      Navigator.Buttons.Insert.Hint = 'Clique para inserir uma nova atividade'
-      Navigator.Buttons.Insert.Visible = True
-      Navigator.Buttons.Append.Visible = False
-      Navigator.Buttons.Delete.Hint = 'Clique para remover o registro selecionado'
-      Navigator.Buttons.Delete.ImageIndex = 2
-      Navigator.Buttons.Delete.Visible = True
-      Navigator.Buttons.Edit.Visible = False
-      Navigator.Buttons.Post.Hint = 'Clique para confirmar o registro'
-      Navigator.Buttons.Post.Visible = True
-      Navigator.Buttons.Cancel.Visible = False
-      Navigator.Buttons.Refresh.Visible = False
-      Navigator.Buttons.SaveBookmark.Visible = False
-      Navigator.Buttons.GotoBookmark.Visible = False
-      Navigator.Buttons.Filter.Visible = False
-      FilterBox.Visible = fvNever
-      DataController.DataSource = DM.dsMovimentacao
-      DataController.DetailKeyFieldNames = 'Codigo_Expediente'
-      DataController.KeyFieldNames = 'Codigo'
-      DataController.MasterKeyFieldNames = 'Codigo'
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      FilterRow.Visible = True
-      OptionsBehavior.FocusFirstCellOnNewRecord = True
-      OptionsBehavior.GoToNextCellOnEnter = True
-      OptionsBehavior.NavigatorHints = True
-      OptionsBehavior.ExpandMasterRowOnDblClick = False
-      OptionsCustomize.ColumnHiding = True
-      OptionsCustomize.DataRowSizing = True
-      OptionsSelection.MultiSelect = True
-      OptionsView.NoDataToDisplayInfoText = 'N'#227'o h'#225' dados para visualizar'
-      OptionsView.GroupByBox = False
-      OptionsView.GroupFooters = gfAlwaysVisible
-      OptionsView.GroupSummaryLayout = gslAlignWithColumns
-      OptionsView.Indicator = True
-      Preview.Visible = True
-      object cxgrd1DBTableView2Codigo: TcxGridDBColumn
-        Caption = 'C'#243'digo'
-        DataBinding.FieldName = 'Codigo'
-        Options.Editing = False
-        Width = 40
-      end
-      object cxgrd1DBTableView2Codigo_Expediente: TcxGridDBColumn
-        DataBinding.FieldName = 'Codigo_Expediente'
-        Visible = False
-        Options.Editing = False
-      end
-      object cxgrd1DBTableView2N_Expediente: TcxGridDBColumn
-        DataBinding.FieldName = 'N_Expediente'
-        Visible = False
-        Options.Editing = False
-        Width = 90
-      end
-      object cxgrd1DBTableView2Data_Movimentacao: TcxGridDBColumn
-        Caption = 'Data Movimenta'#231#227'o'
-        DataBinding.FieldName = 'Data_Movimentacao'
-        Options.Editing = False
-      end
-      object cxgrd1DBTableView2Prazo: TcxGridDBColumn
-        DataBinding.FieldName = 'Prazo'
-        PropertiesClassName = 'TcxDateEditProperties'
-        Properties.AssignedValues.EditFormat = True
-        Properties.DisplayFormat = 'DD/MM/YYYY'
-        Options.Editing = False
-        Width = 68
-      end
-      object cxgrd1DBTableView2Assunto: TcxGridDBColumn
-        DataBinding.FieldName = 'Assunto'
-        Options.Editing = False
-        Width = 300
-      end
-      object cxgrd1DBTableView2Mensagem: TcxGridDBColumn
-        DataBinding.FieldName = 'Mensagem'
-        Options.Editing = False
-        Width = 3000
-      end
-    end
-    object cxgrd1DBTableView3: TcxGridDBTableView
-      Navigator.Buttons.CustomButtons = <>
-      Navigator.Buttons.First.Visible = False
-      Navigator.Buttons.PriorPage.Visible = False
-      Navigator.Buttons.Prior.Visible = False
-      Navigator.Buttons.Next.Enabled = False
-      Navigator.Buttons.Next.Visible = False
-      Navigator.Buttons.NextPage.Visible = False
-      Navigator.Buttons.Last.Visible = False
-      Navigator.Buttons.Insert.Hint = 'Clique para inserir uma nova atividade'
-      Navigator.Buttons.Insert.Visible = True
-      Navigator.Buttons.Append.Visible = False
-      Navigator.Buttons.Delete.Hint = 'Clique para remover o registro selecionado'
-      Navigator.Buttons.Delete.ImageIndex = 2
-      Navigator.Buttons.Delete.Visible = True
-      Navigator.Buttons.Edit.Visible = False
-      Navigator.Buttons.Post.Hint = 'Clique para confirmar o registro'
-      Navigator.Buttons.Post.Visible = True
-      Navigator.Buttons.Cancel.Visible = False
-      Navigator.Buttons.Refresh.Visible = False
-      Navigator.Buttons.SaveBookmark.Visible = False
-      Navigator.Buttons.GotoBookmark.Visible = False
-      Navigator.Buttons.Filter.Visible = False
-      FilterBox.Visible = fvNever
-      DataController.DataSource = DM.dsMovimentacao
-      DataController.KeyFieldNames = 'Codigo'
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      FilterRow.Visible = True
-      OptionsBehavior.FocusFirstCellOnNewRecord = True
-      OptionsBehavior.GoToNextCellOnEnter = True
-      OptionsBehavior.NavigatorHints = True
-      OptionsBehavior.ExpandMasterRowOnDblClick = False
-      OptionsCustomize.ColumnHiding = True
-      OptionsCustomize.DataRowSizing = True
-      OptionsSelection.MultiSelect = True
-      OptionsView.NoDataToDisplayInfoText = 'N'#227'o h'#225' dados para visualizar'
-      OptionsView.GroupFooters = gfAlwaysVisible
-      OptionsView.GroupSummaryLayout = gslAlignWithColumns
-      OptionsView.Indicator = True
-      Preview.Visible = True
-      object cxgrd1DBTableView3Codigo: TcxGridDBColumn
-        Caption = 'C'#243'digo'
-        DataBinding.FieldName = 'Codigo'
-        Options.Editing = False
-        Width = 48
-      end
-      object cxgrd1DBTableView3Codigo_Expediente: TcxGridDBColumn
-        DataBinding.FieldName = 'Codigo_Expediente'
-        Visible = False
-        Options.Editing = False
-      end
-      object cxgrd1DBTableView3N_Expediente: TcxGridDBColumn
-        Caption = 'N'#186' Expediente'
-        DataBinding.FieldName = 'N_Expediente'
-        Options.Editing = False
-        Width = 84
-      end
-      object cxgrd1DBTableView3Data_Movimentacao: TcxGridDBColumn
-        Caption = 'Data Movimenta'#231#227'o'
-        DataBinding.FieldName = 'Data_Movimentacao'
-        Options.Editing = False
-      end
-      object cxgrd1DBTableView3Prazo: TcxGridDBColumn
-        DataBinding.FieldName = 'Prazo'
-        PropertiesClassName = 'TcxDateEditProperties'
-        Properties.DisplayFormat = 'dd/mm/yyyy'
-        Options.Editing = False
-        Width = 69
-      end
-      object cxgrd1DBTableView3Assunto: TcxGridDBColumn
-        DataBinding.FieldName = 'Assunto'
-        Options.Editing = False
-        Width = 300
-      end
-      object cxgrd1DBTableView3Mensagem: TcxGridDBColumn
-        DataBinding.FieldName = 'Mensagem'
-        Options.Editing = False
-        Width = 6000
-      end
-    end
-    object cxgrd1Level1: TcxGridLevel
-      GridView = cxgrd1DBTableView3
-    end
-  end
   object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 942
     Height = 39
     Align = alTop
-    TabOrder = 1
-    ExplicitLeft = -59
-    ExplicitWidth = 849
+    TabOrder = 0
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -1019,7 +732,9 @@ object frmConsultaExpediente: TfrmConsultaExpediente
         Cursor = crHandPoint
         Hint = 
           'Clique para transferir o(s) movimento(s) selecionado(s) para out' +
-          'ro expediente'
+          'ro expediente.'#13#10#13#10'* Utilize os filtros dispon'#237'veis em cada campo' +
+          ' na grade abaixo para selecionar os movimentos a serem transferi' +
+          'dos.'
         ParentShowHint = False
         Picture.Data = {
           07544269746D6170F63C0000424DF63C00000000000036000000280000004800
@@ -1521,6 +1236,190 @@ object frmConsultaExpediente: TfrmConsultaExpediente
       end
     end
   end
+  object cxPageControl1: TcxPageControl
+    Left = 0
+    Top = 39
+    Width = 942
+    Height = 419
+    Align = alClient
+    TabOrder = 1
+    Properties.ActivePage = cxTabSheet1
+    Properties.CustomButtons.Buttons = <>
+    ClientRectBottom = 415
+    ClientRectLeft = 4
+    ClientRectRight = 938
+    ClientRectTop = 24
+    object cxTabSheet1: TcxTabSheet
+      Caption = 'Expediente'
+      ImageIndex = 0
+      object cxgrd1: TcxGrid
+        Left = 0
+        Top = 0
+        Width = 934
+        Height = 391
+        Align = alClient
+        TabOrder = 0
+        object cxgrd1DBTableView3: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          Navigator.Buttons.First.Visible = False
+          Navigator.Buttons.PriorPage.Visible = False
+          Navigator.Buttons.Prior.Visible = False
+          Navigator.Buttons.Next.Enabled = False
+          Navigator.Buttons.Next.Visible = False
+          Navigator.Buttons.NextPage.Visible = False
+          Navigator.Buttons.Last.Visible = False
+          Navigator.Buttons.Insert.Hint = 'Clique para inserir uma nova atividade'
+          Navigator.Buttons.Insert.Visible = True
+          Navigator.Buttons.Append.Visible = False
+          Navigator.Buttons.Delete.Hint = 'Clique para remover o registro selecionado'
+          Navigator.Buttons.Delete.ImageIndex = 2
+          Navigator.Buttons.Delete.Visible = True
+          Navigator.Buttons.Edit.Visible = False
+          Navigator.Buttons.Post.Hint = 'Clique para confirmar o registro'
+          Navigator.Buttons.Post.Visible = True
+          Navigator.Buttons.Cancel.Visible = False
+          Navigator.Buttons.Refresh.Visible = False
+          Navigator.Buttons.SaveBookmark.Visible = False
+          Navigator.Buttons.GotoBookmark.Visible = False
+          Navigator.Buttons.Filter.Visible = False
+          FilterBox.Visible = fvNever
+          DataController.DataSource = DM.dsExpediente
+          DataController.KeyFieldNames = 'Codigo'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          FilterRow.Visible = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsBehavior.GoToNextCellOnEnter = True
+          OptionsBehavior.NavigatorHints = True
+          OptionsBehavior.ExpandMasterRowOnDblClick = False
+          OptionsCustomize.ColumnHiding = True
+          OptionsCustomize.ColumnsQuickCustomization = True
+          OptionsCustomize.DataRowSizing = True
+          OptionsSelection.MultiSelect = True
+          OptionsView.NoDataToDisplayInfoText = 'N'#227'o h'#225' dados para visualizar'
+          OptionsView.GroupFooters = gfAlwaysVisible
+          OptionsView.GroupSummaryLayout = gslAlignWithColumns
+          OptionsView.Indicator = True
+          Preview.Visible = True
+          object cxgrd1DBTableView3Codigo: TcxGridDBColumn
+            Caption = 'C'#243'digo'
+            DataBinding.FieldName = 'Codigo'
+          end
+          object cxgrd1DBTableView3N_Expediente: TcxGridDBColumn
+            Caption = 'N'#186' Expediente'
+            DataBinding.FieldName = 'N_Expediente'
+            Width = 89
+          end
+          object cxgrd1DBTableView3Data_Lancamento: TcxGridDBColumn
+            Caption = 'Lan'#231'amento'
+            DataBinding.FieldName = 'Data_Lancamento'
+          end
+          object cxgrd1DBTableView3Status: TcxGridDBColumn
+            DataBinding.FieldName = 'Status'
+            OnGetDisplayText = cxgrd1DBTableView3StatusGetDisplayText
+          end
+          object cxgrd1DBTableView3Descricao: TcxGridDBColumn
+            Caption = 'Descri'#231#227'o'
+            DataBinding.FieldName = 'Descricao'
+            Width = 300
+          end
+        end
+        object cxgrd1Level1: TcxGridLevel
+          GridView = cxgrd1DBTableView3
+        end
+      end
+    end
+    object cxTabSheet2: TcxTabSheet
+      Caption = 'Movimenta'#231#227'o'
+      ImageIndex = 1
+      object cxGrid1: TcxGrid
+        Left = 0
+        Top = 0
+        Width = 934
+        Height = 391
+        Align = alClient
+        TabOrder = 0
+        object cxGridDBTableView4: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          Navigator.Buttons.First.Visible = False
+          Navigator.Buttons.PriorPage.Visible = False
+          Navigator.Buttons.Prior.Visible = False
+          Navigator.Buttons.Next.Enabled = False
+          Navigator.Buttons.Next.Visible = False
+          Navigator.Buttons.NextPage.Visible = False
+          Navigator.Buttons.Last.Visible = False
+          Navigator.Buttons.Insert.Hint = 'Clique para inserir uma nova atividade'
+          Navigator.Buttons.Insert.Visible = True
+          Navigator.Buttons.Append.Visible = False
+          Navigator.Buttons.Delete.Hint = 'Clique para remover o registro selecionado'
+          Navigator.Buttons.Delete.ImageIndex = 2
+          Navigator.Buttons.Delete.Visible = True
+          Navigator.Buttons.Edit.Visible = False
+          Navigator.Buttons.Post.Hint = 'Clique para confirmar o registro'
+          Navigator.Buttons.Post.Visible = True
+          Navigator.Buttons.Cancel.Visible = False
+          Navigator.Buttons.Refresh.Visible = False
+          Navigator.Buttons.SaveBookmark.Visible = False
+          Navigator.Buttons.GotoBookmark.Visible = False
+          Navigator.Buttons.Filter.Visible = False
+          FilterBox.Visible = fvNever
+          DataController.DataSource = DM.dsMovimentacao
+          DataController.KeyFieldNames = 'Codigo'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          FilterRow.Visible = True
+          OptionsBehavior.FocusFirstCellOnNewRecord = True
+          OptionsBehavior.GoToNextCellOnEnter = True
+          OptionsBehavior.NavigatorHints = True
+          OptionsBehavior.ExpandMasterRowOnDblClick = False
+          OptionsCustomize.ColumnHiding = True
+          OptionsCustomize.ColumnsQuickCustomization = True
+          OptionsCustomize.DataRowSizing = True
+          OptionsSelection.MultiSelect = True
+          OptionsView.NoDataToDisplayInfoText = 'N'#227'o h'#225' dados para visualizar'
+          OptionsView.GroupFooters = gfAlwaysVisible
+          OptionsView.GroupSummaryLayout = gslAlignWithColumns
+          OptionsView.Indicator = True
+          Preview.Visible = True
+          object cxGridDBTableView4Codigo: TcxGridDBColumn
+            DataBinding.FieldName = 'Codigo'
+            Visible = False
+          end
+          object cxGridDBTableView4Codigo_Expediente: TcxGridDBColumn
+            DataBinding.FieldName = 'Codigo_Expediente'
+            Visible = False
+          end
+          object cxGridDBTableView4N_Expediente: TcxGridDBColumn
+            Caption = 'N'#186' Expediente'
+            DataBinding.FieldName = 'N_Expediente'
+            Width = 92
+          end
+          object cxGridDBTableView4Descricao: TcxGridDBColumn
+            Caption = 'Descri'#231#227'o'
+            DataBinding.FieldName = 'Descricao'
+            Width = 200
+          end
+          object cxGridDBTableView4Data_Movimentacao: TcxGridDBColumn
+            Caption = 'Movimenta'#231#227'o'
+            DataBinding.FieldName = 'Data_Movimentacao'
+          end
+          object cxGridDBTableView4Prazo: TcxGridDBColumn
+            DataBinding.FieldName = 'Prazo'
+          end
+          object cxGridDBTableView4Mensagem: TcxGridDBColumn
+            Caption = 'Movimenta'#231#227'o'
+            DataBinding.FieldName = 'Mensagem'
+            Width = 1000
+          end
+        end
+        object cxGridLevel1: TcxGridLevel
+          GridView = cxGridDBTableView4
+        end
+      end
+    end
+  end
   object dxComponentPrinter1: TdxComponentPrinter
     CurrentLink = dxComponentPrinter1Link1
     PreviewOptions.Caption = 'Visualiza'#231#227'o de relat'#243'rio'
@@ -1530,8 +1429,6 @@ object frmConsultaExpediente: TfrmConsultaExpediente
     Left = 456
     Top = 16
     object dxComponentPrinter1Link1: TdxGridReportLink
-      Active = True
-      Component = cxgrd1
       DateFormat = 1
       PDFExportOptions.Author = 'ProCampo'
       PDFExportOptions.Creator = 'ProCampo'
@@ -1566,7 +1463,7 @@ object frmConsultaExpediente: TfrmConsultaExpediente
       PrinterPage._dxMeasurementUnits_ = 0
       PrinterPage._dxLastMU_ = 2
       ReportDocument.Caption = 'Novo documento'
-      ReportDocument.CreationDate = 43108.422693842590000000
+      ReportDocument.CreationDate = 43137.403623888890000000
       ReportDocument.Creator = 'ProCampo'
       ReportDocument.IsDescriptionAssigned = True
       ReportFootnotes.Font.Charset = ANSI_CHARSET
@@ -1591,21 +1488,21 @@ object frmConsultaExpediente: TfrmConsultaExpediente
   object cxPropertiesStore1: TcxPropertiesStore
     Components = <
       item
-        Component = cxgrd1DBTableView3Assunto
+        Component = cxgrd1DBTableView3Codigo
         Properties.Strings = (
           'SortOrder'
           'Visible'
           'Width')
       end
       item
-        Component = cxgrd1DBTableView3Data_Movimentacao
+        Component = cxgrd1DBTableView3Data_Lancamento
         Properties.Strings = (
           'SortOrder'
           'Visible'
           'Width')
       end
       item
-        Component = cxgrd1DBTableView3Mensagem
+        Component = cxgrd1DBTableView3Descricao
         Properties.Strings = (
           'SortOrder'
           'Visible'
@@ -1619,7 +1516,56 @@ object frmConsultaExpediente: TfrmConsultaExpediente
           'Width')
       end
       item
-        Component = cxgrd1DBTableView3Prazo
+        Component = cxgrd1DBTableView3Status
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGridDBTableView4Codigo
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGridDBTableView4Codigo_Expediente
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGridDBTableView4Data_Movimentacao
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGridDBTableView4Descricao
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGridDBTableView4Mensagem
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGridDBTableView4N_Expediente
+        Properties.Strings = (
+          'SortOrder'
+          'Visible'
+          'Width')
+      end
+      item
+        Component = cxGridDBTableView4Prazo
         Properties.Strings = (
           'SortOrder'
           'Visible'

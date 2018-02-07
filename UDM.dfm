@@ -19,7 +19,7 @@ object DM: TDM
     Left = 137
     Top = 159
     Bitmap = {
-      494C010109000C00DC0720002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000C00E40720002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1616,7 +1616,7 @@ object DM: TDM
     Left = 96
     Top = 160
     Bitmap = {
-      494C010102000800780420002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000800800420002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
       000000000000000000000000000000000000000000000000000000000000B484
       84006C666E006C666E0000000000000000000000000000000000000000000000
@@ -2157,7 +2157,7 @@ object DM: TDM
     Left = 56
     Top = 160
     Bitmap = {
-      494C01010B00B800DC0420002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B00B800E40420002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3753,7 +3753,7 @@ object DM: TDM
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'select M.*, E.N_Expediente from Movimentacao M'
+      'select M.*, E.N_Expediente, E.Descricao from Movimentacao M'
       'join Expediente E on (M.Codigo_Expediente = E.Codigo)')
     Left = 216
     Top = 232
@@ -3767,10 +3767,6 @@ object DM: TDM
     object qryMovimentacaoData_Movimentacao: TDateTimeField
       FieldName = 'Data_Movimentacao'
     end
-    object qryMovimentacaoAssunto: TStringField
-      FieldName = 'Assunto'
-      Size = 200
-    end
     object qryMovimentacaoMensagem: TStringField
       FieldName = 'Mensagem'
       Size = 1000
@@ -3781,6 +3777,10 @@ object DM: TDM
     end
     object qryMovimentacaoPrazo: TDateTimeField
       FieldName = 'Prazo'
+    end
+    object qryMovimentacaoDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 1000
     end
   end
   object qryExpediente: TADOQuery
@@ -3801,6 +3801,13 @@ object DM: TDM
     object qryExpedienteData_Lancamento: TDateTimeField
       FieldName = 'Data_Lancamento'
     end
+    object qryExpedienteDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 1000
+    end
+    object qryExpedienteStatus: TIntegerField
+      FieldName = 'Status'
+    end
   end
   object dsExpediente: TDataSource
     DataSet = qryExpediente
@@ -3811,5 +3818,39 @@ object DM: TDM
     DataSet = qryMovimentacao
     Left = 256
     Top = 232
+  end
+  object dsMovimentacao_Prazo: TDataSource
+    DataSet = qryMovimentacao_Prazo
+    Left = 368
+    Top = 232
+  end
+  object qryMovimentacao_Prazo: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      
+        'select E.N_Expediente, E.Descricao, M.Data_Movimentacao, M.Prazo' +
+        ' from Movimentacao M '
+      'join Expediente E on (M.Codigo_Expediente = E.Codigo) '
+      
+        'where M.Prazo >= GETDATE() and ( DATEDIFF(day, GETDATE(), M.Praz' +
+        'o) <= '#39'3'#39' and DATEDIFF(day, GETDATE(), M.Prazo) >= '#39'0'#39')')
+    Left = 336
+    Top = 232
+    object qryMovimentacao_PrazoN_Expediente: TStringField
+      FieldName = 'N_Expediente'
+      Size = 50
+    end
+    object qryMovimentacao_PrazoDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 1000
+    end
+    object qryMovimentacao_PrazoData_Movimentacao: TDateTimeField
+      FieldName = 'Data_Movimentacao'
+    end
+    object qryMovimentacao_PrazoPrazo: TDateTimeField
+      FieldName = 'Prazo'
+    end
   end
 end

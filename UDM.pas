@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, Data.DB, Data.Win.ADODB, Vcl.ImgList,
-  Vcl.Controls;
+  Vcl.Controls, cxClasses, cxPropertiesStore;
 
 type
   TDM = class(TDataModule)
@@ -22,10 +22,18 @@ type
     qryMovimentacaoCodigo: TAutoIncField;
     qryMovimentacaoCodigo_Expediente: TIntegerField;
     qryMovimentacaoData_Movimentacao: TDateTimeField;
-    qryMovimentacaoAssunto: TStringField;
     qryMovimentacaoMensagem: TStringField;
     qryMovimentacaoN_Expediente: TStringField;
     qryMovimentacaoPrazo: TDateTimeField;
+    qryExpedienteDescricao: TStringField;
+    qryMovimentacaoDescricao: TStringField;
+    qryExpedienteStatus: TIntegerField;
+    dsMovimentacao_Prazo: TDataSource;
+    qryMovimentacao_Prazo: TADOQuery;
+    qryMovimentacao_PrazoN_Expediente: TStringField;
+    qryMovimentacao_PrazoDescricao: TStringField;
+    qryMovimentacao_PrazoData_Movimentacao: TDateTimeField;
+    qryMovimentacao_PrazoPrazo: TDateTimeField;
   private
     { Private declarations }
   public

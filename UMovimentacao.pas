@@ -24,7 +24,7 @@ uses
   cxGridCustomView, cxGrid, Vcl.Menus, cxButtons, Data.Win.ADODB, MetodosBasicos,
   OperacoesConexao, Mensagens, Log, ComandoSQLEntidade, GeradorDeCodigo,
   HistoricoEntidade, HistoricoDominio, UExpedienteDAO, Constantes,
-  UMovimentacaoDAO, cxCalendar;
+  UMovimentacaoDAO, cxCalendar, cxContainer, cxGroupBox, cxRadioGroup;
 
 type
   TfrmMovimentacao = class(TForm)
@@ -51,8 +51,6 @@ type
     Label2: TLabel;
     BtnInserir_Expediente: TcxButton;
     Label4: TLabel;
-    MmoAssunto: TMemo;
-    Label5: TLabel;
     EdtCodigo_Expediente: TEdit;
     DateDataMovimentacao: TDateTimePicker;
     Label7: TLabel;
@@ -69,13 +67,18 @@ type
     cxGridDBTableView1Codigo_Expediente: TcxGridDBColumn;
     cxGridDBTableView1Data_Movimentacao: TcxGridDBColumn;
     cxGridDBTableView1Prazo: TcxGridDBColumn;
-    cxGridDBTableView1Assunto: TcxGridDBColumn;
     cxGridDBTableView1Mensagem: TcxGridDBColumn;
     BtnInserir_Movimento: TcxButton;
     cxGridDBTableView1N_Expediente: TcxGridDBColumn;
     BtnEditar_Movimento: TcxButton;
     Label6: TLabel;
     EdtCodigo_Movimentacao: TEdit;
+    Label5: TLabel;
+    MmoDescricao: TMemo;
+    cxGrid1DBTableView1Descricao: TcxGridDBColumn;
+    RGStatus: TcxRadioGroup;
+    cxGrid1DBTableView1Status: TcxGridDBColumn;
+    BtnEditar_Expediente: TcxButton;
     procedure BBtnNovoClick(Sender: TObject);
     procedure BtnInserir_ExpedienteClick(Sender: TObject);
     procedure BtnInserir_MovimentoClick(Sender: TObject);
@@ -93,6 +96,10 @@ type
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure cxGridDBTableView1NavigatorButtonsButtonClick(Sender: TObject;
       AButtonIndex: Integer; var ADone: Boolean);
+    procedure cxGrid1DBTableView1StatusGetDisplayText(
+      Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+      var AText: string);
+    procedure BtnEditar_ExpedienteClick(Sender: TObject);
   private
     { Private declarations }
     Conexao, Conexao2: TADOConnection;
@@ -149,6 +156,8 @@ begin
 end;
 
 procedure TfrmMovimentacao.BBtnNovoClick(Sender: TObject);
+var
+  Data: AnsiString;
 begin
   PageControl1.TabIndex:= 0;
   Op.HabilitaCampos(frmMovimentacao);
@@ -166,6 +175,8 @@ begin
   TOperacoesConexao.IniciaQuerys([dm.qryMovimentacao, dm.qryExpediente], Conexao);
 
   EdtCodigo.Text:= IntToStr(GeraCodigo.GeraCodigoSequencia('Expediente', Conexao));
+  Data:= FormatDateTime('yyyy',now);
+  EdtN_Expediente.Text:= Data+EdtCodigo.Text;
   DateDataLancamento.Date:= date;
   DateDataMovimentacao.DateTime:= now;
   DatePrazo.Date:= date;
@@ -185,12 +196,35 @@ begin
   Op.DesabilitaCampos(frmMovimentacao);
 end;
 
+procedure TfrmMovimentacao.BtnEditar_ExpedienteClick(Sender: TObject);
+begin
+  if (ExpedienteDAO.Editar(Conexao, StrToInt(EdtCodigo.Text), EdtN_Expediente.Text, MmoDescricao.Text, DateDataLancamento.DateTime,
+                            RGStatus.ItemIndex, Retorno) = 0) then
+  begin
+    //TOperacoesConexao.CancelaConexao(Conexao);
+    Mensagens.MensagemErro(MensagemErroAoGravar+' - '+Retorno);
+    Exit;
+  end
+  else
+  begin
+    Mensagens.MensagemInformacao(MensagemSalvoComSucesso);
+  end;
+
+  ExpedienteDAO.Buscar(Conexao, dm.qryExpediente, Retorno);
+  //EdtN_Expediente.Clear;
+  //EdtCodigo.Text:= IntToStr(GeraCodigo.GeraCodigoSequencia('Expediente', Conexao));
+  //DateDataLancamento.Date:= date;
+  //DateDataMovimentacao.DateTime:= now;
+  //DatePrazo.Date:= date;
+  EdtN_Expediente.SetFocus;
+end;
+
 procedure TfrmMovimentacao.BtnEditar_MovimentoClick(Sender: TObject);
 begin
   if (Valida_Campos) then
   begin
     if (MovimentacaoDAO.Editar(Conexao, StrToInt(EdtCodigo_Movimentacao.Text), DateDataMovimentacao.DateTime,
-      DatePrazo.Date, MmoAssunto.Text, MmoMensagem.Text, Retorno) = 0) then
+      DatePrazo.Date, MmoMensagem.Text, Retorno) = 0) then
     begin
       //TOperacoesConexao.CancelaConexao(Conexao);
       Mensagens.MensagemErro(MensagemErroAoGravar+' - '+Retorno);
@@ -206,9 +240,8 @@ begin
     EdtCodigo_Movimentacao.Clear;
     EdtN_Expediente.Clear;
     MmoMensagem.Clear;
-    MmoAssunto.Clear;
 
-    BtnInserir_Expediente.Enabled:= true;
+    BtnInserir_Movimento.Enabled:= true;
     BtnEditar_Movimento.Enabled:= false;
   end;
 
@@ -216,8 +249,8 @@ end;
 
 procedure TfrmMovimentacao.BtnInserir_ExpedienteClick(Sender: TObject);
 begin
-  if (ExpedienteDAO.Salvar(Conexao, StrToInt(EdtCodigo.Text), EdtN_Expediente.Text, DateDataLancamento.DateTime,
-                            Retorno) = 0) then
+  if (ExpedienteDAO.Salvar(Conexao, StrToInt(EdtCodigo.Text), EdtN_Expediente.Text, MmoDescricao.Text, DateDataLancamento.DateTime,
+                            RGStatus.ItemIndex, Retorno) = 0) then
   begin
     //TOperacoesConexao.CancelaConexao(Conexao);
     Mensagens.MensagemErro(MensagemErroAoGravar+' - '+Retorno);
@@ -239,7 +272,7 @@ begin
   if (Valida_Campos) then
   begin
     if (MovimentacaoDAO.Salvar(Conexao, StrToInt(EdtCodigo_Expediente.Text), DateDataMovimentacao.DateTime,
-      DatePrazo.Date, MmoAssunto.Text, MmoMensagem.Text, Retorno) = 0) then
+      DatePrazo.Date, MmoMensagem.Text, Retorno) = 0) then
     begin
       //TOperacoesConexao.CancelaConexao(Conexao);
       Mensagens.MensagemErro(MensagemErroAoGravar+' - '+Retorno);
@@ -253,7 +286,6 @@ begin
 
     EdtCodigo_Movimentacao.Clear;
     MmoMensagem.Clear;
-    MmoAssunto.Clear;
     DateDataMovimentacao.DateTime:= now;
     DatePrazo.Date:= date;
 
@@ -265,8 +297,13 @@ end;
 procedure TfrmMovimentacao.cxGrid1DBTableView1DblClick(Sender: TObject);
 begin
   PageControl1.TabIndex:= 1;
+  EdtCodigo.Text:= dm.qryExpedienteCodigo.AsString;
+  EdtN_Expediente.Text:= dm.qryExpedienteN_Expediente.AsString;
+  MmoDescricao.Text:= dm.qryExpedienteDescricao.AsString;
+  RGStatus.ItemIndex:= dm.qryExpedienteStatus.AsInteger;
+
   EdtCodigo_Expediente.Text:= dm.qryExpedienteCodigo.AsString;
-  EdtN_Expediente_Movimentacao.Text:= dm.qryExpedienteN_Expediente.AsString;;
+  EdtN_Expediente_Movimentacao.Text:= dm.qryExpedienteN_Expediente.AsString;
   DateDataMovimentacao.SetFocus;
   MovimentacaoDAO.Buscar(Conexao, dm.qryMovimentacao, Retorno, dm.qryExpedienteCodigo.AsInteger);
 end;
@@ -299,6 +336,16 @@ begin
   end;
 end;
 
+procedure TfrmMovimentacao.cxGrid1DBTableView1StatusGetDisplayText(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+  var AText: string);
+begin
+  if (ARecord.Values[Sender.Index] = '0') then
+    AText:= 'Lançado'
+  else
+    AText:= 'Arquivado';
+end;
+
 procedure TfrmMovimentacao.cxGridDBTableView1DblClick(Sender: TObject);
 var
    data: AnsiString;
@@ -316,7 +363,6 @@ Begin
   EdtN_Expediente.Text:= dm.qryMovimentacaoN_Expediente.AsString;
   DateDataMovimentacao.Date:= dm.qryMovimentacaoData_Movimentacao.AsDateTime;
   DatePrazo.Date:= dm.qryMovimentacaoPrazo.AsDateTime;
-  MmoAssunto.Text:= dm.qryMovimentacaoAssunto.AsString;
   MmoMensagem.Text:= dm.qryMovimentacaoMensagem.AsString;
   BtnInserir_Movimento.Enabled:= false;
   BtnEditar_Movimento.Enabled:= true;
@@ -394,13 +440,6 @@ begin
   begin
     Mensagens.MensagemErro(MensagemFaltaDados);
     EdtCodigo_Expediente.SetFocus;
-    Exit;
-  end;
-
-  if (MmoAssunto.Text = '') then
-  begin
-    Mensagens.MensagemErro(MensagemFaltaDados);
-    MmoAssunto.SetFocus;
     Exit;
   end;
 

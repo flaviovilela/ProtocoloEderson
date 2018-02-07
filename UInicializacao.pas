@@ -11,6 +11,7 @@ type
     public
       function Carrega_Dados_Conexao(var Configuracao: TConfiguracao): TConfiguracao;
       procedure AtualizaBD(var Conexao: TADOConnection);
+      procedure Verifica_Prazo_Movimentacao();
   end;
 implementation
 
@@ -35,6 +36,8 @@ begin
       add('CREATE TABLE Expediente ');
       add('(Codigo int primary key, ');
       add('N_Expediente varchar(50), ');
+      Add('Descricao varchar (1000),');
+      Add('Status int,');
       add('Data_Lancamento datetime) ');
       ExecSQL;
     end;
@@ -61,7 +64,6 @@ begin
       add('Codigo_Expediente int, ');
       add('Data_Movimentacao datetime, ');
       Add('Prazo datetime,');
-      Add('Assunto varchar (200),');
       Add('Mensagem varchar(1000))');
       ExecSQL;
     end;
@@ -112,6 +114,11 @@ begin
   finally
     ArqIni.Free;
   end;
+end;
+
+procedure TInicializacao.Verifica_Prazo_Movimentacao;
+begin
+
 end;
 
 end.
