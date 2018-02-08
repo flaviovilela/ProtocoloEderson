@@ -14,7 +14,8 @@ type
   public
     function Salvar(var Conexao: TADOConnection; Codigo: integer; N_Expediente, Descricao: AnsiString; Data: TDateTime; Status: integer; var Retorno: AnsiString): integer;
     function Editar(var Conexao: TADOConnection; Codigo: Integer; N_Expediente, Descricao: AnsiString; Data: TDateTime; Status: integer; var Retorno: AnsiString): integer;
-    function Buscar(var Conexao: TADOConnection; var Query: TADOQuery; var Retorno: AnsiString): integer;
+    function Buscar(var Conexao: TADOConnection; var Query: TADOQuery; var Retorno: AnsiString): integer; overload;
+    function Buscar(Codigo_Expediente: integer; var Conexao: TADOConnection; var Query: TADOQuery; var Retorno: AnsiString): integer; overload;
     function Remover(var Conexao: TADOConnection; var Retorno: AnsiString): integer; overload;
     function Remover(var Conexao: TADOConnection; var Retorno: AnsiString; Codigo_Expediente: Integer): integer; overload;
 end;
@@ -65,6 +66,26 @@ begin
     FComandoSQL:= TComandoSQLEntidade.Create;
     FComandoSQL.Conexao:= Conexao;
     FComandoSQL.ComandoSQL:= 'select * from Expediente';
+    FDAO:= TExecutaComandosSQLDominio.Create(FComandoSQL);
+    Result:= FDAO.ExecutaComandoSQLRetornaADOQuery(Query, Retorno);
+  finally
+
+  end;
+
+end;
+
+function TExpedienteDAO.Buscar(Codigo_Expediente: integer;
+  var Conexao: TADOConnection; var Query: TADOQuery;
+  var Retorno: AnsiString): integer;
+var
+  FComandoSQL: TComandoSQLEntidade;
+begin
+  try
+    FComandoSQL:= TComandoSQLEntidade.Create;
+    FComandoSQL.Conexao:= Conexao;
+    FComandoSQL.ComandoSQL:= 'select * from Expediente where Codigo = :Codigo';
+    FComandoSQL.Parametros.Add('Codigo');
+    FComandoSQL.Valores.Add(Codigo_Expediente);
     FDAO:= TExecutaComandosSQLDominio.Create(FComandoSQL);
     Result:= FDAO.ExecutaComandoSQLRetornaADOQuery(Query, Retorno);
   finally

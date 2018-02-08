@@ -25,7 +25,7 @@ uses
   dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit,
   cxNavigator, Data.DB, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridCustomView, cxGrid,
-  UMovimentacaoDAO;
+  UMovimentacaoDAO, UExpedienteDAO;
 
 type
   TFrmPrincipal = class(TForm)
@@ -48,12 +48,16 @@ type
     cxgrd1DBTableView3Descricao: TcxGridDBColumn;
     cxgrd1DBTableView3Data_Movimentacao: TcxGridDBColumn;
     cxgrd1DBTableView3Prazo: TcxGridDBColumn;
+    cxgrd1DBTableView3Codigo: TcxGridDBColumn;
+    cxgrd1DBTableView3Status: TcxGridDBColumn;
+    cxgrd1DBTableView3Codigo_Movimentacao: TcxGridDBColumn;
     procedure acRegistrar_MovimentacaoExecute(Sender: TObject);
     procedure act2Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure LblConsultaClick(Sender: TObject);
     procedure LblConsultaDblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cxgrd1DBTableView3DblClick(Sender: TObject);
   private
     { Private declarations }
     Inicializacao: TInicializacao;
@@ -64,6 +68,7 @@ type
     Configuracao: TConfiguracao;
     Conexao: TADOConnection;
     MovimentacaoDAO: TMovimentacaoDAO;
+    ExpedienteDAO: TExpedienteDAO;
   end;
 
 var
@@ -85,6 +90,30 @@ begin
   Application.CreateForm(TfrmConsultaExpediente, frmConsultaExpediente);
   frmConsultaExpediente.Show;
   Op.CentralizaForm(frmConsultaExpediente, FrmPrincipal, rbn1.Height, StatusBar.Height);
+end;
+
+procedure TFrmPrincipal.cxgrd1DBTableView3DblClick(Sender: TObject);
+begin
+  Application.CreateForm(TfrmMovimentacao, frmMovimentacao);
+  frmMovimentacao.Show;
+  Op.CentralizaForm(frmMovimentacao, FrmPrincipal, rbn1.Height, StatusBar.Height);
+
+  frmMovimentacao.BBtnNovoClick(Self);
+
+  //ExpedienteDAO.Buscar(Conexao, dm.qryExpediente, Retorno);
+  MovimentacaoDAO.Buscar(Conexao, dm.qryMovimentacao, Retorno, dm.qryMovimentacao_PrazoCodigo.AsInteger);
+  frmMovimentacao.EdtCodigo.Text:= dm.qryMovimentacao_PrazoCodigo.AsString;
+  frmMovimentacao.EdtN_Expediente.Text:= dm.qryMovimentacao_PrazoN_Expediente.AsString;
+  frmMovimentacao.MmoDescricao.Text:= dm.qryMovimentacao_PrazoDescricao.AsString;
+  frmMovimentacao.RGStatus.ItemIndex:= dm.qryMovimentacao_PrazoStatus.AsInteger;
+  frmMovimentacao.EdtCodigo_Movimentacao.Text:= dm.qryMovimentacao_PrazoCodigo_Movimentacao.AsString;
+  frmMovimentacao.EdtCodigo_Expediente.Text:= dm.qryMovimentacao_PrazoCodigo.AsString;
+  frmMovimentacao.EdtN_Expediente_Movimentacao.Text:= dm.qryMovimentacao_PrazoN_Expediente.AsString;
+  frmMovimentacao.DateDataMovimentacao.Date:= dm.qryMovimentacao_PrazoData_Movimentacao.AsDateTime;
+  frmMovimentacao.DatePrazo.Date:= dm.qryMovimentacao_PrazoPrazo.AsDateTime;
+  frmMovimentacao.MmoMensagem.Text:= dm.qryMovimentacao_PrazoMensagem.AsString;
+  frmMovimentacao.PageControl1.TabIndex:= 1;
+  cxgrd1.Visible:= false;
 end;
 
 procedure TFrmPrincipal.acRegistrar_MovimentacaoExecute(Sender: TObject);
@@ -126,7 +155,7 @@ begin
   begin
     LblConsulta.Visible:= false;
   end;
-
+  cxgrd1.ShowHint:= True;
   TOperacoesConexao.ConfirmaConexao(Conexao);
 end;
 

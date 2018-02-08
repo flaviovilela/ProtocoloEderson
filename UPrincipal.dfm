@@ -98,9 +98,11 @@ object FrmPrincipal: TFrmPrincipal
     Top = 194
     Width = 839
     Height = 265
+    Hint = 'Duplo clique para abrir a janela de movimenta'#231#227'o.'
     TabOrder = 2
     Visible = False
     object cxgrd1DBTableView3: TcxGridDBTableView
+      OnDblClick = cxgrd1DBTableView3DblClick
       Navigator.Buttons.CustomButtons = <>
       Navigator.Buttons.First.Visible = False
       Navigator.Buttons.PriorPage.Visible = False
@@ -130,6 +132,7 @@ object FrmPrincipal: TFrmPrincipal
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
       FilterRow.Visible = True
+      OptionsBehavior.CellHints = True
       OptionsBehavior.FocusFirstCellOnNewRecord = True
       OptionsBehavior.GoToNextCellOnEnter = True
       OptionsBehavior.NavigatorHints = True
@@ -144,22 +147,40 @@ object FrmPrincipal: TFrmPrincipal
       OptionsView.GroupSummaryLayout = gslAlignWithColumns
       OptionsView.Indicator = True
       Preview.Visible = True
+      object cxgrd1DBTableView3Codigo: TcxGridDBColumn
+        Caption = 'C'#243'digo Ex.'
+        DataBinding.FieldName = 'Codigo'
+        Options.Editing = False
+      end
       object cxgrd1DBTableView3N_Expediente: TcxGridDBColumn
         Caption = 'N'#186' Expediente'
         DataBinding.FieldName = 'N_Expediente'
+        Options.Editing = False
         Width = 96
+      end
+      object cxgrd1DBTableView3Codigo_Movimentacao: TcxGridDBColumn
+        Caption = 'C'#243'digo Mov.'
+        DataBinding.FieldName = 'Codigo_Movimentacao'
+        Options.Editing = False
+      end
+      object cxgrd1DBTableView3Status: TcxGridDBColumn
+        DataBinding.FieldName = 'Status'
+        Options.Editing = False
       end
       object cxgrd1DBTableView3Descricao: TcxGridDBColumn
         Caption = 'Descri'#231#227'o'
         DataBinding.FieldName = 'Descricao'
+        Options.Editing = False
         Width = 307
       end
       object cxgrd1DBTableView3Data_Movimentacao: TcxGridDBColumn
         Caption = 'Movimenta'#231#227'o'
         DataBinding.FieldName = 'Data_Movimentacao'
+        Options.Editing = False
       end
       object cxgrd1DBTableView3Prazo: TcxGridDBColumn
         DataBinding.FieldName = 'Prazo'
+        Options.Editing = False
         Width = 110
       end
     end

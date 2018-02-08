@@ -119,7 +119,7 @@ object frmMovimentacao: TfrmMovimentacao
     Top = 0
     Width = 680
     Height = 416
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 1
@@ -583,7 +583,6 @@ object frmMovimentacao: TfrmMovimentacao
           object cxGridDBTableView1Codigo: TcxGridDBColumn
             Caption = 'C'#243'digo'
             DataBinding.FieldName = 'Codigo'
-            Visible = False
             Options.Editing = False
             Width = 45
           end

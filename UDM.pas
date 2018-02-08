@@ -34,6 +34,10 @@ type
     qryMovimentacao_PrazoDescricao: TStringField;
     qryMovimentacao_PrazoData_Movimentacao: TDateTimeField;
     qryMovimentacao_PrazoPrazo: TDateTimeField;
+    qryMovimentacao_PrazoCodigo: TIntegerField;
+    qryMovimentacao_PrazoStatus: TIntegerField;
+    qryMovimentacao_PrazoCodigo_Movimentacao: TAutoIncField;
+    qryMovimentacao_PrazoMensagem: TStringField;
   private
     { Private declarations }
   public

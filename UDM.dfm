@@ -19,7 +19,7 @@ object DM: TDM
     Left = 137
     Top = 159
     Bitmap = {
-      494C010109000C00E40720002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000C00E80720002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1616,7 +1616,7 @@ object DM: TDM
     Left = 96
     Top = 160
     Bitmap = {
-      494C010102000800800420002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000800840420002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000002000000001002000000000000040
       000000000000000000000000000000000000000000000000000000000000B484
       84006C666E006C666E0000000000000000000000000000000000000000000000
@@ -2157,7 +2157,7 @@ object DM: TDM
     Left = 56
     Top = 160
     Bitmap = {
-      494C01010B00B800E40420002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B00B800E80420002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3830,8 +3830,9 @@ object DM: TDM
     Parameters = <>
     SQL.Strings = (
       
-        'select E.N_Expediente, E.Descricao, M.Data_Movimentacao, M.Prazo' +
-        ' from Movimentacao M '
+        'select E.Codigo, E.N_Expediente, E.Descricao, E.Status, M.Codigo' +
+        ' as Codigo_Movimentacao, M.Data_Movimentacao, M.Prazo, M.Mensage' +
+        'm from Movimentacao M '
       'join Expediente E on (M.Codigo_Expediente = E.Codigo) '
       
         'where M.Prazo >= GETDATE() and ( DATEDIFF(day, GETDATE(), M.Praz' +
@@ -3851,6 +3852,20 @@ object DM: TDM
     end
     object qryMovimentacao_PrazoPrazo: TDateTimeField
       FieldName = 'Prazo'
+    end
+    object qryMovimentacao_PrazoCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object qryMovimentacao_PrazoStatus: TIntegerField
+      FieldName = 'Status'
+    end
+    object qryMovimentacao_PrazoCodigo_Movimentacao: TAutoIncField
+      FieldName = 'Codigo_Movimentacao'
+      ReadOnly = True
+    end
+    object qryMovimentacao_PrazoMensagem: TStringField
+      FieldName = 'Mensagem'
+      Size = 1000
     end
   end
 end

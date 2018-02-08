@@ -128,7 +128,7 @@ begin
     Data:= date;
     FComandoSQL:= TComandoSQLEntidade.Create;
     FComandoSQL.Conexao:= Conexao;
-    FComandoSQL.ComandoSQL:= 'select E.N_Expediente, E.Descricao, M.Data_Movimentacao, M.Prazo from Movimentacao M '+
+    FComandoSQL.ComandoSQL:= 'select E.Codigo, E.N_Expediente, E.Descricao, E.Status, M.Codigo as Codigo_Movimentacao, M.Data_Movimentacao, M.Prazo, M.Mensagem from Movimentacao M '+
                             ' join Expediente E on (M.Codigo_Expediente = E.Codigo) '+
                             ' where M.Prazo >= GETDATE() and ( DATEDIFF(day, GETDATE(), M.Prazo) <= 3 and DATEDIFF(day, GETDATE(), M.Prazo) >= 0)';
     //FComandoSQL.Parametros.Add('Prazo');
